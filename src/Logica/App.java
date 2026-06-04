@@ -12,9 +12,10 @@ public class App {
 	{
 		leerHechizos();
 		leerMagos();
+		encontrarDiezHechizos();
 		menu();
 	}
-	
+
 	public static void leerHechizos() throws FileNotFoundException
 	{
 		File f = new File("txts/Hechizos.txt");
@@ -53,5 +54,14 @@ public class App {
 			
 			
 		} while (opcion == 3);
+	}
+	
+	public static void encontrarDiezHechizos() 
+	{
+		for(int i = 0; i < 10; i++)
+		{
+			String m = sistema.encontrarHechizos(i);
+			System.out.println(m);
+		}
 	}
 }	

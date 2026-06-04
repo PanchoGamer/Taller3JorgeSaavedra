@@ -1,6 +1,6 @@
 package Dominio;
 
-public class Fuego extends Hechizos{
+public class Fuego extends Hechizos implements Hechizo{
 	private int tiempoQuemadura;
 
 	public Fuego(String nombreHechizo, String tipo, int damage, int tiempoQuemadura) 
@@ -12,5 +12,12 @@ public class Fuego extends Hechizos{
 	public int getTiempoQuemadura() 
 	{
 		return tiempoQuemadura;
+	}
+	
+	@Override
+	public double calcularPuntaje() 
+	{
+		double puntaje = (getDamage() * tiempoQuemadura);
+		return puntaje;
 	}
 }

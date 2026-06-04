@@ -1,6 +1,6 @@
 package Dominio;
 
-public class Hechizos {
+public class Hechizos implements Hechizo{
 	private String nombreHechizo;
 	private String tipo;
 	private int damage;
@@ -26,4 +26,16 @@ public class Hechizos {
 	{
 		return damage;
 	}
+
+	@Override
+	public String toString() {
+		return "Hechizo: " + getNombreHechizo();
+	}
+
+	@Override
+	public double calcularPuntaje() 
+	{
+		return 0;
+	}
+	
 }

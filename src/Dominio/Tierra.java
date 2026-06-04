@@ -1,6 +1,6 @@
 package Dominio;
 
-public class Tierra extends Hechizos{
+public class Tierra extends Hechizos implements Hechizo{
 	private int mejoraDefensa;
 
 	public Tierra(String nombreHechizo, String tipo, int damage, int mejoraDefensa) 
@@ -12,5 +12,12 @@ public class Tierra extends Hechizos{
 	public int getMejoraDefensa() 
 	{
 		return mejoraDefensa;
+	}
+	
+	@Override
+	public double calcularPuntaje() 
+	{
+		double puntaje = (getDamage() * mejoraDefensa)/2;
+		return puntaje;
 	}
 }

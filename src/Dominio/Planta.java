@@ -1,6 +1,6 @@
 package Dominio;
 
-public class Planta extends Hechizos{
+public class Planta extends Hechizos implements Hechizo{
 	private int duracionStun;
 	private int cantPlantas;
 	
@@ -19,5 +19,12 @@ public class Planta extends Hechizos{
 	public int getCantPlantas() 
 	{
 		return cantPlantas;
+	}
+	
+	@Override
+	public double calcularPuntaje() 
+	{
+		double puntaje = (getDamage() + (duracionStun * cantPlantas));
+		return puntaje;
 	}
 }

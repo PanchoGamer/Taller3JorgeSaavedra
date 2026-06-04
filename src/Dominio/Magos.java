@@ -1,13 +1,12 @@
 package Dominio;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Magos {
 	private String nombre;
+	private double puntajeTotal;
+	
 	private static List<Hechizos> hechizos = new ArrayList<>();
 	
 	public Magos(String nombre) 
@@ -19,22 +18,28 @@ public class Magos {
 	{
 		return nombre;
 	}
+	
+	public double getPuntajeTotal()
+	{
+		return puntajeTotal;
+	}
 
 	public void agregarHechizos(Hechizos h)
 	{
 		hechizos.add(h);
 	}
 	
-	public static void buscarHechizos() throws FileNotFoundException
+	public void calcularPuntajeTotal()
 	{
-		File f = new File("txts/Hechizos.txt");
-		Scanner s = new Scanner(f);
-		boolean encontrado = false;
-		
-		while (!encontrado)
+		puntajeTotal = 0;
+		for (Hechizos h: hechizos)
 		{
-			String linea = s.nextLine();
+			puntajeTotal += h.calcularPuntaje();
 		}
-		
+	}
+
+	@Override
+	public String toString() {
+		return "Nombre: " + getNombre() + "Hechizos: \n" ;
 	}
 }

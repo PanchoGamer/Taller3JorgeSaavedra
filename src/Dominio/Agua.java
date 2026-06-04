@@ -1,6 +1,6 @@
 package Dominio;
 
-public class Agua extends Hechizos{
+public class Agua extends Hechizos implements Hechizo{
 	private int cantHeal;
 	private int presionAgua;
 	
@@ -9,5 +9,22 @@ public class Agua extends Hechizos{
 		super(nombreHechizo, tipo, damage);
 		this.cantHeal = cantHeal;
 		this.presionAgua = presionAgua;
+	}
+	
+	public int getCantHeal() 
+	{
+		return cantHeal;
+	}
+
+	public int getPresionAgua() 
+	{
+		return presionAgua;
+	}
+
+	@Override
+	public double calcularPuntaje() 
+	{
+		double puntaje = (getDamage() + cantHeal + presionAgua)*2;
+		return puntaje;
 	}
 }
