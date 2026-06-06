@@ -12,8 +12,8 @@ public class App {
 	{
 		leerHechizos();
 		leerMagos();
-		encontrarDiezHechizos();
 		menu();
+		
 	}
 
 	public static void leerHechizos() throws FileNotFoundException
@@ -71,17 +71,72 @@ public class App {
 				menuAdmin(s);
 			}
 			
+			else if (opcion == 2)
+			{
+				menuAnalisis(s);
+			}
 			
-		} while (opcion == 3);
+			
+		} while (opcion != 3);
 	}
 	
-	public static void encontrarDiezHechizos() 
+	public static void menuAnalisis(Scanner s)
 	{
-		for(int i = 0; i < 10; i++)
+		int option = 0;
+		do
 		{
-			String m = sistema.encontrarHechizos(i);
-			System.out.println(m);
-		}
+			System.out.println("\n1. Top 10 mejores hechizos");
+			System.out.println("2. Top 3 mejores magos");
+			System.out.println("3. Mostrar todos los hechizos");
+			System.out.println("4. Mostrar todos los magos");
+			System.out.println("5. Mostrar todos los hechizos junto a su puntuacion");
+			System.out.println("6. Mostrar todos los magos junto a su puntuacion");
+			System.out.println("7. Salir");
+			System.out.print("> ");
+			
+			String entry = s.nextLine();
+			
+			try
+			{
+				option = Integer.parseInt(entry);
+			} catch (NumberFormatException e)
+			{
+				System.out.println("Ingrese una opcion valida.");
+			}
+			
+			if (option == 1)
+			{
+				System.out.println();
+				encontrarDiezHechizos();
+			}
+			
+			else if (option == 2)
+			{
+				System.out.println();
+				encontrarTresMagos();
+			}
+			
+			else if (option == 3)
+			{
+				mostrarHechizos(0);
+			}
+			
+			else if (option == 4)
+			{
+				mostrarMagos(0);
+			}
+			
+			else if (option == 5)
+			{
+				mostrarHechizos(1);
+			}
+			
+			else if (option == 6)
+			{
+				mostrarMagos(1);
+			}
+			
+		} while (option != 7);
 	}
 	
 	public static void menuAdmin(Scanner s)
@@ -135,5 +190,61 @@ public class App {
 				
 			}
 		} while (option != 7);
+	}
+	
+	public static void encontrarDiezHechizos() 
+	{
+		System.out.println("Los 10 mejores hechizos!");
+		for(int i = 0; i < 10; i++)
+		{
+			String m = sistema.encontrarMejoresHechizos(i);
+			System.out.println(i+1 + ") " + m);
+		}
+	}
+	
+	public static void encontrarTresMagos()
+	{
+		System.out.println("Los 3 mejores Magos!");
+		for(int i = 0; i < 3; i++)
+		{
+			String mago = sistema.mejoresMagos(i);
+			System.out.println(i+1 + ") " + mago);
+		}
+	}
+	
+	public static void mostrarHechizos(int tipo)
+	{
+		int cantHechizos = sistema.cantidadDeHechizos();
+		System.out.println("\nHechizos!\n");
+		for(int i = 0; i < cantHechizos;i++)
+		{
+			if (tipo == 0)
+			{
+				System.out.println(i+1 + ") " + sistema.mostrarHechizos(i));
+			}
+			else if (tipo == 1)
+			{
+				System.out.println(i+1 + ") " + sistema.mostrarHechizosConPuntaje(i));
+			}
+		}
+	}
+	
+	public static void mostrarMagos(int tipo)
+	{
+		int cantMagos = sistema.cantidadDeMagos();
+		System.out.println("\nMagos!\n");
+		for(int i = 0; i < cantMagos;i++)
+		{
+			if(tipo == 0)
+			{
+				System.out.println(i+1 + ") " + sistema.mostrarMagos(i));
+			}
+			
+			else if (tipo == 1)
+			{
+				System.out.println(i+1 + ") " + sistema.mostrarMagosConPuntaje(i));
+			}
+			
+		}
 	}
 }	

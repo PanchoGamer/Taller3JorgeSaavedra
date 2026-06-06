@@ -7,7 +7,7 @@ public class Magos {
 	private String nombre;
 	private double puntajeTotal;
 	
-	private static List<Hechizos> hechizos = new ArrayList<>();
+	private List<Hechizos> hechizosPropios = new ArrayList<>();
 	
 	public Magos(String nombre) 
 	{
@@ -26,20 +26,21 @@ public class Magos {
 
 	public void agregarHechizos(Hechizos h)
 	{
-		hechizos.add(h);
+		hechizosPropios.add(h);
 	}
 	
-	public void calcularPuntajeTotal()
+	public double calcularPuntajeTotal()
 	{
-		puntajeTotal = 0;
-		for (Hechizos h: hechizos)
+		this.puntajeTotal = 0;
+		for (Hechizos h: hechizosPropios)
 		{
-			puntajeTotal += h.calcularPuntaje();
+			this.puntajeTotal += h.calcularPuntaje();
 		}
+		return this.puntajeTotal;
 	}
 
 	@Override
 	public String toString() {
-		return "Nombre: " + getNombre() + "Hechizos: \n" ;
+		return "Nombre: " + getNombre() + "Hechizos: \n";
 	}
 }

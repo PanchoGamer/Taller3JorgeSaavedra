@@ -20,7 +20,7 @@ public class SistemaImpl implements Sistema{
 		Magos m = new Magos(nombre);
 		maguitos.add(m);
 		String hechizosPropios = partes[1];
-		String[] partes2 = hechizosPropios.split("|");
+		String[] partes2 = hechizosPropios.split("\\|");
 		for (int i = 0; i < partes2.length; i++)
 		{
 			for(Hechizos hec: hechizos)
@@ -33,7 +33,6 @@ public class SistemaImpl implements Sistema{
 				}
 			}
 		}
-		
 	}
 	
 	public void crearHechizos(String linea)
@@ -74,7 +73,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
-	public String encontrarHechizos(int index) 
+	public String encontrarMejoresHechizos(int index) 
 	{
 		
 		List<Hechizos> hecTemp = new ArrayList<>();
@@ -96,13 +95,33 @@ public class SistemaImpl implements Sistema{
 				}
 			}
 		}
+		
 		return hechizos.get(index).getNombreHechizo();
 	}
 
 	@Override
-	public void mejoresMagos() 
+	public String mejoresMagos(int index) 
 	{
+		List<Magos> mTemp = new ArrayList<>();
 		
+		for(Magos m: maguitos)
+		{
+			mTemp.add(m);
+		}
+		
+		for(int a = 0; a < mTemp.size() - 1;a++)
+		{
+			for(int b = a + 1; b < mTemp.size(); b++)
+			{
+				if (mTemp.get(a).calcularPuntajeTotal() < mTemp.get(b).calcularPuntajeTotal())
+				{
+					Magos temp = mTemp.get(a);
+					mTemp.set(a, mTemp.get(b));
+					mTemp.set(b, temp);
+				}
+			}
+		}
+		return mTemp.get(index).getNombre();
 	}
 	
 	@Override
@@ -139,7 +158,7 @@ public class SistemaImpl implements Sistema{
 	{
 		Magos m = new Magos(nombre);
 		maguitos.add(m);
-		escribirNuevoMago(nombre);
+		///escribirNuevoMago(nombre);
 	}
 	
 	public void escribirNuevoMago(String mago)
@@ -150,6 +169,44 @@ public class SistemaImpl implements Sistema{
 			
 		}
 		
-		
+	}
+	
+	public String mostrarHechizos(int index)
+	{
+		return hechizos.get(index).getNombreHechizo();
+	}
+
+	@Override
+	public int cantidadDeHechizos() 
+	{
+		int cantHechizos = hechizos.size();
+		return cantHechizos;
+	}
+	
+	@Override
+	public int cantidadDeMagos()
+	{
+		int cantMagos = maguitos.size();
+		return cantMagos;
+	}
+	
+	@Override
+	public String mostrarMagos(int index)
+	{
+		return maguitos.get(index).getNombre();
+	}
+	
+	@Override
+	public String mostrarMagosConPuntaje(int index)
+	{
+		String linea = maguitos.get(index).getNombre() + " | Puntaje Total: " + maguitos.get(index).calcularPuntajeTotal();
+		return linea;
+	}
+	
+	@Override
+	public String mostrarHechizosConPuntaje(int index)
+	{
+		String linea = hechizos.get(index).getNombreHechizo() + " | Puntaje: " + hechizos.get(index).calcularPuntaje();
+		return linea;
 	}
 }
