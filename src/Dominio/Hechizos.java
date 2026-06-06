@@ -26,6 +26,11 @@ public class Hechizos implements Hechizo{
 	{
 		return damage;
 	}
+	
+	public void setDamage(int damageNew)
+	{
+		this.damage = damageNew;
+	}
 
 	@Override
 	public String toString() {

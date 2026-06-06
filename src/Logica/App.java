@@ -46,11 +46,30 @@ public class App {
 	
 	public static void menu()
 	{
+		Scanner s = new Scanner(System.in);
 		int opcion = 0;
 		
 		do
 		{
+			System.out.println("1. Menu Administrador");
+			System.out.println("2. Menu Analista");
+			System.out.println("3. Salir");
+			System.out.print("> ");
 			
+			String entrada = s.nextLine();
+			
+			try 
+			{
+				opcion = Integer.parseInt(entrada);
+			} catch (NumberFormatException e)
+			{
+				System.out.println("Error. Ingrese una opcion valida");
+			}
+			
+			if (opcion == 1)
+			{
+				menuAdmin(s);
+			}
 			
 			
 		} while (opcion == 3);
@@ -63,5 +82,58 @@ public class App {
 			String m = sistema.encontrarHechizos(i);
 			System.out.println(m);
 		}
+	}
+	
+	public static void menuAdmin(Scanner s)
+	{
+		int option = 0;
+		do
+		{
+			System.out.println("1. Añadir Mago");
+			System.out.println("2. Modificar Mago");
+			System.out.println("3. Eliminar Mago");
+			System.out.println("4. Agregar Hechizo");
+			System.out.println("5. Modificar Hechizo");
+			System.out.println("6. Eliminar Hechizo");
+			System.out.println("7. Salir");
+			System.out.print("> ");
+			
+			String entry = s.nextLine();
+			
+			try 
+			{
+				option = Integer.parseInt(entry);
+			} catch (NumberFormatException e)
+			{
+				System.out.println("Error. Ingrese una opcion valida");
+			}
+			
+			if (option == 1)
+			{
+				System.out.print("Ingrese el nombre del mago: ");
+				String nombre = s.nextLine();
+				
+				sistema.agregarMago(nombre);
+				
+				System.out.print("\nIngrese cuantos hechizos tendra el mago:");
+				int cantHechizos = 0;
+				try 
+				{
+					cantHechizos = Integer.parseInt(s.nextLine());
+				} catch (NumberFormatException e)
+				{
+					System.out.println("Ingrese un numero correcto.");
+				}
+				
+				for(int i = 1; i < cantHechizos+1; i++)
+				{
+					System.out.print("\nHechizo " + i + ": ");
+					String nombreHechizo = s.nextLine();
+					
+					sistema.agregarHechizosMagos(nombre, nombreHechizo);
+				}
+				
+			}
+		} while (option != 7);
 	}
 }	

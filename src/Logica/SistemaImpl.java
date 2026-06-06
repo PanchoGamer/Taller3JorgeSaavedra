@@ -2,6 +2,9 @@ package Logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
 
 import Dominio.*;
 
@@ -16,12 +19,19 @@ public class SistemaImpl implements Sistema{
 		String nombre = partes[0];
 		Magos m = new Magos(nombre);
 		maguitos.add(m);
-		String hechizos = partes[1];
-		String[] partes2 = hechizos.split("|");
+		String hechizosPropios = partes[1];
+		String[] partes2 = hechizosPropios.split("|");
 		for (int i = 0; i < partes2.length; i++)
 		{
-			Hechizos h = buscarHechizos(partes2[i]);
-			m.agregarHechizos(h);
+			for(Hechizos hec: hechizos)
+			{
+				if (hec.getNombreHechizo().equalsIgnoreCase(partes2[i]))
+				{
+					Hechizos h = hec;
+					m.agregarHechizos(h);
+					break;
+				}
+			}
 		}
 		
 	}
@@ -62,31 +72,27 @@ public class SistemaImpl implements Sistema{
 			hechizos.add(h);
 		}
 	}
-	
-	public static Hechizos buscarHechizos(String nomHechizo) 
-	{
-		for(Hechizos hechizoTest: hechizos)
-		{
-			if (hechizoTest.getNombreHechizo().equalsIgnoreCase(nomHechizo))
-			{
-				return hechizoTest;
-			}
-		}
-		return null;
-	}
 
 	@Override
 	public String encontrarHechizos(int index) 
 	{
-		for(int a = 0; a < hechizos.size() - 1;a++)
+		
+		List<Hechizos> hecTemp = new ArrayList<>();
+		
+		for(Hechizos h: hechizos)
 		{
-			for(int b = a + 1; b < hechizos.size(); b++ )
+			hecTemp.add(h);
+		}
+		
+		for(int a = 0; a < hecTemp.size() - 1;a++)
+		{
+			for(int b = a + 1; b < hecTemp.size(); b++ )
 			{
-				if (hechizos.get(a).calcularPuntaje() < hechizos.get(b).calcularPuntaje())
+				if (hecTemp.get(a).calcularPuntaje() < hecTemp.get(b).calcularPuntaje())
 				{
-					Hechizos temp = hechizos.get(a);
-					hechizos.set(a, hechizos.get(b));
-					hechizos.set(b, temp);
+					Hechizos temp = hecTemp.get(a);
+					hecTemp.set(a, hecTemp.get(b));
+					hecTemp.set(b, temp);
 				}
 			}
 		}
@@ -96,6 +102,54 @@ public class SistemaImpl implements Sistema{
 	@Override
 	public void mejoresMagos() 
 	{
+		
+	}
+	
+	@Override
+	public void agregarHechizosMagos(String nombre, String hechizo)
+	{
+		Hechizos hec = null;
+		Magos m = null;
+		
+		for (Hechizos h: hechizos)
+		{
+			if (h.getNombreHechizo().equalsIgnoreCase(hechizo))
+			{
+				hec = h;
+				break;
+			}
+		}
+		
+		for (Magos mag: maguitos)
+		{
+			if(mag.getNombre().equalsIgnoreCase(nombre))
+			{
+				m = mag;
+			}
+		}
+		
+		if (hec != null)
+		{
+			m.agregarHechizos(hec);
+		}
+	}
+	
+	@Override
+	public void agregarMago(String nombre)
+	{
+		Magos m = new Magos(nombre);
+		maguitos.add(m);
+		escribirNuevoMago(nombre);
+	}
+	
+	public void escribirNuevoMago(String mago)
+	{
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("txts/Magos.txt"));
+		} catch (IOException e) {
+			
+		}
+		
 		
 	}
 }
