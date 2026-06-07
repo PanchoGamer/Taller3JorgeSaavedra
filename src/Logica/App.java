@@ -13,7 +13,6 @@ public class App {
 		leerHechizos();
 		leerMagos();
 		menu();
-		
 	}
 
 	public static void leerHechizos() throws FileNotFoundException
@@ -180,15 +179,38 @@ public class App {
 					System.out.println("Ingrese un numero correcto.");
 				}
 				
+				int hechizosActuales = sistema.cantidadDeHechizos();
+				
+	
 				for(int i = 1; i < cantHechizos+1; i++)
 				{
-					System.out.print("\nHechizo " + i + ": ");
-					String nombreHechizo = s.nextLine();
+					System.out.print("\nElija el hechizo " + i + ": \n");
 					
-					sistema.agregarHechizosMagos(nombre, nombreHechizo);
+					int eleccion = 0;
+					
+					for(int j = 0; j < hechizosActuales;j++)
+					{
+						System.out.println(j+1 + ") " + sistema.mostrarHechizos(j));
+					}
+					
+					String hechizo = s.nextLine();
+					
+					try
+					{
+						eleccion = Integer.parseInt(hechizo);
+					} catch (NumberFormatException e)
+					{
+						System.out.println("Ingrese un numero correcto");
+						break;
+					}
+					
+					String nomHechizo = sistema.mostrarHechizos(eleccion-1);
+					
+					sistema.agregarHechizosMagos(nombre, nomHechizo);
 				}
 				
 			}
+			
 		} while (option != 7);
 	}
 	

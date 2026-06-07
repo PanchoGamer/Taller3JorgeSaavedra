@@ -168,7 +168,6 @@ public class SistemaImpl implements Sistema{
 		} catch (IOException e) {
 			
 		}
-		
 	}
 	
 	public String mostrarHechizos(int index)
