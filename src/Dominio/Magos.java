@@ -19,9 +19,29 @@ public class Magos {
 		return nombre;
 	}
 	
+	public void setNombre(String nuevoNombre)
+	{
+		this.nombre = nuevoNombre;
+	}
+	
 	public double getPuntajeTotal()
 	{
 		return puntajeTotal;
+	}
+	
+	public int cantidadHechizos()
+	{
+		return hechizosPropios.size();
+	}
+	
+	public String getHechizo(int index)
+	{
+		return hechizosPropios.get(index).getNombreHechizo();
+	}
+	
+	public String nombreHechizoPropio(int index)
+	{
+		return hechizosPropios.get(index).getNombreHechizo();
 	}
 
 	public void agregarHechizos(Hechizos h)

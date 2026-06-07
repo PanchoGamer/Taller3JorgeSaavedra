@@ -164,54 +164,160 @@ public class App {
 			
 			if (option == 1)
 			{
-				System.out.print("Ingrese el nombre del mago: ");
-				String nombre = s.nextLine();
-				
-				sistema.agregarMago(nombre);
-				
-				System.out.print("\nIngrese cuantos hechizos tendra el mago:");
-				int cantHechizos = 0;
-				try 
-				{
-					cantHechizos = Integer.parseInt(s.nextLine());
-				} catch (NumberFormatException e)
-				{
-					System.out.println("Ingrese un numero correcto.");
-				}
-				
-				int hechizosActuales = sistema.cantidadDeHechizos();
-				
-	
-				for(int i = 1; i < cantHechizos+1; i++)
-				{
-					System.out.print("\nElija el hechizo " + i + ": \n");
-					
-					int eleccion = 0;
-					
-					for(int j = 0; j < hechizosActuales;j++)
-					{
-						System.out.println(j+1 + ") " + sistema.mostrarHechizos(j));
-					}
-					
-					String hechizo = s.nextLine();
-					
-					try
-					{
-						eleccion = Integer.parseInt(hechizo);
-					} catch (NumberFormatException e)
-					{
-						System.out.println("Ingrese un numero correcto");
-						break;
-					}
-					
-					String nomHechizo = sistema.mostrarHechizos(eleccion-1);
-					
-					sistema.agregarHechizosMagos(nombre, nomHechizo);
-				}
-				
+				crearMago(s);
+			}
+			
+			else if(option == 2)
+			{
+				modificarMago(s);
+			}
+			
+			else if (option == 3)
+			{
+				eliminarMago(s);
 			}
 			
 		} while (option != 7);
+	}
+
+	public static void crearMago(Scanner s) {
+		System.out.print("Ingrese el nombre del mago: ");
+		String nombre = s.nextLine();
+		
+		sistema.agregarMago(nombre);
+		
+		System.out.print("\nIngrese cuantos hechizos tendra el mago:");
+		int cantHechizos = 0;
+		try 
+		{
+			cantHechizos = Integer.parseInt(s.nextLine());
+		} catch (NumberFormatException e)
+		{
+			System.out.println("Ingrese un numero correcto.");
+		}
+		
+		int hechizosActuales = sistema.cantidadDeHechizos();
+		
+
+		for(int i = 1; i < cantHechizos+1; i++)
+		{
+			System.out.print("\nElija el hechizo " + i + ": \n");
+			
+			int eleccion = 0;
+			
+			for(int j = 0; j < hechizosActuales;j++)
+			{
+				System.out.println(j+1 + ") " + sistema.mostrarHechizos(j));
+			}
+			
+			String hechizo = s.nextLine();
+			
+			try
+			{
+				eleccion = Integer.parseInt(hechizo);
+			} catch (NumberFormatException e)
+			{
+				System.out.println("Ingrese un numero correcto");
+				break;
+			}
+			
+			if (eleccion < 1 || eleccion > hechizosActuales)
+			{
+				System.out.println("Error ingrese solo entre los numeros mostrados");
+				sistema.eliminarMago(nombre);
+			}
+			
+			else
+			{
+				String nomHechizo = sistema.mostrarHechizos(eleccion-1);
+				sistema.agregarHechizosMagos(nombre, nomHechizo);
+			}
+		}
+		
+		sistema.reescribirMagos();
+	}
+	
+	public static void modificarMago(Scanner s)
+	{
+		
+		int eleccion = 0;
+		
+		for (int i = 0; i < sistema.cantidadDeMagos(); i++)
+		{
+			System.out.println(i+1 + ")" + sistema.mostrarMagos(i));
+		}
+		
+		System.out.print("> ");
+		int magoElegido = 0;
+		
+		String magoSeleccion = s.nextLine();
+		try
+		{
+			magoElegido = Integer.parseInt(magoSeleccion);
+		} catch (NumberFormatException e)
+		{
+			System.out.println("Ingrese solo numeros");
+		}
+		
+		if (magoElegido < 1 || magoElegido > sistema.cantidadDeMagos())
+		{
+			System.out.println("Elija solo entre los magos mostrados");
+		}
+		
+		else
+		{
+			do {
+				System.out.println("\nQue desea modificar?");
+				System.out.println("\n1) Nombre");
+				System.out.println("2) Eliminar un hechizo");
+				System.out.println("3) Agregar un hechizo");
+				System.out.println("4) Cancelar");
+				System.out.print("> ");
+				
+				String entry1 = s.nextLine();
+				
+				try
+				{
+					eleccion = Integer.parseInt(entry1);
+				} catch (NumberFormatException e)
+				{
+					System.out.println("Ingrese una opcion valida");
+				}
+				
+				if (eleccion == 1)
+				{
+					System.out.print("Elija un nuevo nombre: ");
+					String nuevoNombre = s.nextLine();
+					sistema.cambiarNombre(magoElegido-1, nuevoNombre);
+				}
+				
+				else if (eleccion == 2)
+				{
+					System.out.println("Que hechizo quieres eliminar?");
+					int cantHechizos = sistema.hechizosMago(magoElegido-1);
+					///sistema.cambiarHechizo(magoElegido-1);
+				}
+				
+				else if (eleccion == 3)
+				{
+					
+				}
+				
+			} while (eleccion != 4);
+			
+		}
+		
+		
+	}
+	
+	public static void eliminarMago(Scanner s)
+	{
+		System.out.println("Que mago quieres eliminar:");
+		for (int i = 0; i < sistema.cantidadDeMagos(); i++)
+		{
+			System.out.println(i+1 + ")" + sistema.mostrarMagos(i));
+		}
+		
 	}
 	
 	public static void encontrarDiezHechizos() 

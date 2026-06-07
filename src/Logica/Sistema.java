@@ -14,4 +14,10 @@ public interface Sistema {
 	String mostrarMagos(int index);
 	String mostrarHechizosConPuntaje(int index);
 	String mostrarMagosConPuntaje(int index);
+	void eliminarMago(String nomMago);
+	void eliminarMagoMenu(int index);
+	void reescribirMagos();
+	void cambiarNombre(int index, String nuevoNombre);
+	String mostrarHechizosDeMago(int index, int magoElegido);
+	int hechizosMago(int magoElegido);
 }

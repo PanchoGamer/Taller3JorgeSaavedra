@@ -158,16 +158,6 @@ public class SistemaImpl implements Sistema{
 	{
 		Magos m = new Magos(nombre);
 		maguitos.add(m);
-		///escribirNuevoMago(nombre);
-	}
-	
-	public void escribirNuevoMago(String mago)
-	{
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("txts/Magos.txt"));
-		} catch (IOException e) {
-			
-		}
 	}
 	
 	public String mostrarHechizos(int index)
@@ -207,5 +197,76 @@ public class SistemaImpl implements Sistema{
 	{
 		String linea = hechizos.get(index).getNombreHechizo() + " | Puntaje: " + hechizos.get(index).calcularPuntaje();
 		return linea;
+	}
+	
+	@Override
+	public void eliminarMago(String nomMago)
+	{
+		for (Magos m: maguitos)
+		{
+			if (m.getNombre().equalsIgnoreCase(nomMago))
+			{
+				maguitos.remove(m);
+ 			}
+		}
+	}
+	
+	@Override
+	public void cambiarNombre(int index, String nuevoNombre)
+	{
+		maguitos.get(index).setNombre(nuevoNombre);
+		reescribirMagos();
+	}
+	
+	@Override
+	public void eliminarMagoMenu(int index)
+	{
+		 maguitos.remove(index);
+		 reescribirMagos();
+	}
+	
+	@Override
+	public void reescribirMagos()
+	{
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("txts/Magos.txt"));
+			for (Magos m: maguitos)
+			{
+				String linea = m.getNombre() + ";";
+				for (int i = 0; i < m.cantidadHechizos(); i++)
+				{
+					String hechizo = m.nombreHechizoPropio(i);
+					if (i != m.cantidadHechizos()-1)
+					{
+						linea += hechizo + "|";
+					}
+					else 
+					{
+						linea += hechizo;
+					}
+				}
+				bw.write(linea);
+				bw.newLine();
+			}
+			bw.close();
+		} catch (IOException e) 
+		{
+			System.out.println("error 1");
+		}
+		
+		
+	}
+	
+	@Override
+	public String mostrarHechizosDeMago(int index, int magoElegido)
+	{
+		String hechizo = maguitos.get(magoElegido).getHechizo(index);
+		return hechizo;
+	}
+	
+	@Override
+	public int hechizosMago(int magoElegido)
+	{
+		return maguitos.get(magoElegido).cantidadHechizos();
 	}
 }
