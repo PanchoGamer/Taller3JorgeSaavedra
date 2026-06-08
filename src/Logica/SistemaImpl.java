@@ -240,11 +240,47 @@ public class SistemaImpl implements Sistema{
 		 reescribirMagos();
 	}
 	
-	// Permite crear un nuevo hechizo y agregarlo a la lista
+	// Permite crear un nuevo hechizo con solo 4 variables y agregarlo a la lista
 	@Override
-	public void crearNuevoHechizoSimple(String nombre, String tipo, int daño, int tiempoDeQuemadura)
+	public void crearNuevoHechizoSimple(String nombre, String tipo, int daño, int variado)
 	{
+		if (tipo.equalsIgnoreCase("Fuego"))
+		{
+			Hechizos h = new Fuego(nombre,tipo,daño,variado);
+			hechizos.add(h);
+		}
+		else if (tipo.equalsIgnoreCase("Tierra"))
+		{
+			Hechizos h = new Tierra(nombre,tipo,daño,variado);
+			hechizos.add(h);
+		}
 		
+		reescribirHechizos();
+	}
+	
+	// Permite crear hechizos con 5 atributios
+	@Override
+	public void crearNuevoHechizoComplejo(String nombre, String tipo, int damage, int variado, int variado2)
+	{
+		if (tipo.equalsIgnoreCase("Planta"))
+		{
+			Hechizos h = new Planta(nombre,tipo,damage,variado,variado2);
+			hechizos.add(h);
+		}
+		else if (tipo.equalsIgnoreCase("Agua"))
+		{
+			Hechizos h = new Agua(nombre,tipo,damage,variado,variado2);
+			hechizos.add(h);
+		}
+		
+		reescribirHechizos();
+	}
+	
+	@Override
+	public void eliminarHechizo(int index)
+	{
+		hechizos.remove(index);
+		reescribirHechizos();
 	}
 	
 	// Permite reescribir el archivo de magos
@@ -286,6 +322,30 @@ public class SistemaImpl implements Sistema{
 	{
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter("txts/Hechizos.txt"));
+			for (Hechizos h: hechizos)
+			{
+				String linea = "";
+				if (h.getTipo().equalsIgnoreCase("Fuego"))
+				{
+					linea = h.getNombreHechizo() + ";" + h.getTipo() + ";" + h.getDamage() + ";" + h.getTiempoQuemadura();
+				}
+				else if (h.getTipo().equalsIgnoreCase("Tierra"))
+				{
+					linea = h.getNombreHechizo() + ";" + h.getTipo() + ";" + h.getDamage() + ";" + h.getMejoraDefensa();
+				}
+				else if (h.getTipo().equalsIgnoreCase("Planta"))
+				{
+					linea = h.getNombreHechizo() + ";" + h.getTipo() + ";" + h.getDamage() + ";" + h.getDuracionStun() + ";" + h.getCantPlantas();
+				}
+				else if (h.getTipo().equalsIgnoreCase("Agua"))
+				{
+					linea = h.getNombreHechizo() + ";" + h.getTipo() + ";" + h.getDamage() + ";" + h.getDuracionStun() + ";" + h.getCantPlantas();
+				}
+				
+				bw.write(linea);
+				bw.newLine();
+			}
+			bw.close();
 		} catch (IOException e)
 		{
 		}

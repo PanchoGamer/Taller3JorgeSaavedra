@@ -42,5 +42,41 @@ public class Hechizos implements Hechizo{
 	{
 		return 0;
 	}
+
+	@Override
+	public int getTiempoQuemadura() 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getMejoraDefensa() 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getDuracionStun() 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getCantPlantas() 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getCantHeal() 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getPresionAgua() 
+	{
+		return 0;
+	}
 	
 }

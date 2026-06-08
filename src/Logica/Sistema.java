@@ -22,4 +22,6 @@ public interface Sistema {
 	String mostrarHechizosDeMago(int index, int magoElegido);
 	int hechizosMago(int magoElegido);
 	void crearNuevoHechizoSimple(String nombre, String tipo, int daño, int tiempoDeQuemadura);
+	void crearNuevoHechizoComplejo(String nombre, String tipo, int damage, int variado, int variado2);
+	void eliminarHechizo(int index);
 }

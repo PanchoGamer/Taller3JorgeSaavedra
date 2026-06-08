@@ -332,9 +332,31 @@ public class App {
 	public static void eliminarMago(Scanner s)
 	{
 		System.out.println("Que mago quieres eliminar:");
+		int seleccion = 0;
 		for (int i = 0; i < sistema.cantidadDeMagos(); i++)
 		{
 			System.out.println(i+1 + ")" + sistema.mostrarMagos(i));
+		}
+		
+		System.out.print("> ");
+		String magoSeleccionado = s.nextLine();
+		
+		try 
+		{
+			seleccion = Integer.parseInt(magoSeleccionado);
+		} catch (NumberFormatException e)
+		{
+			System.out.println("Ingrese un numero");
+		}
+		
+		if (seleccion > 1 || seleccion < sistema.cantidadDeHechizos())
+		{
+			sistema.eliminarMagoMenu(seleccion-1);
+		}
+		
+		else
+		{
+			System.out.println("Elija solo entre los que se muestran\n");
 		}
 		
 	}
@@ -369,7 +391,84 @@ public class App {
 					System.out.println("Algun valor incorrecto. Vuelva a ingresar");
 				}
 				
-				sistema.crearNuevoHechizoSimple(nombreHechizoNuevo,tipoHechizoNuevo, tiempoDeQuemadura);
+				sistema.crearNuevoHechizoSimple(nombreHechizoNuevo,tipoHechizoNuevo, nuevoDaño,
+						nuevoTiempoDeQuemadura);
+			}
+			else if (tipoHechizoNuevo.equalsIgnoreCase("Tierra"))
+			{
+				System.out.print("Ingresa el daño que hara el hechizo (entero): ");
+				String daño = s.nextLine();
+				System.out.print("Ingresa la mejora de defensa (entero): ");
+				String mejoraDefensa = s.nextLine();
+				
+				int nuevoDaño = 0;
+				int nuevaMejoraDeDefensa = 0;
+				
+				try
+				{
+					nuevoDaño = Integer.parseInt(daño);
+					nuevaMejoraDeDefensa = Integer.parseInt(mejoraDefensa);
+				} catch (NumberFormatException e)
+				{
+					System.out.println("Algun valor incorrecto. Vuelva a ingresar");
+				}
+				
+				sistema.crearNuevoHechizoSimple(nombreHechizoNuevo,tipoHechizoNuevo, nuevoDaño,
+						nuevaMejoraDeDefensa);
+			}
+			
+			else if (tipoHechizoNuevo.equalsIgnoreCase("Planta"))
+			{
+				System.out.print("Ingresa el daño que hara el hechizo (entero): ");
+				String daño = s.nextLine();
+				System.out.print("Ingresa la duracion de stun (entero): ");
+				String duracionStun = s.nextLine();
+				System.out.print("Ingresa la cantidad de plantas (entero): ");
+				String cantPlantas = s.nextLine();
+				
+				int nuevoDaño = 0;
+				int nuevaDuracionStun = 0;
+				int nuevaCantPlantas = 0;
+				
+				try
+				{
+					nuevoDaño = Integer.parseInt(daño);
+					nuevaDuracionStun = Integer.parseInt(duracionStun);
+					nuevaCantPlantas = Integer.parseInt(cantPlantas);
+				} catch (NumberFormatException e)
+				{
+					System.out.println("Algun valor incorrecto. Vuelva a ingresar");
+				}
+				
+				sistema.crearNuevoHechizoComplejo(nombreHechizoNuevo,tipoHechizoNuevo, nuevoDaño,
+						nuevaDuracionStun,nuevaCantPlantas);
+			}
+			
+			else if (tipoHechizoNuevo.equalsIgnoreCase("Agua"))
+			{
+				System.out.print("Ingresa el daño que hara el hechizo (entero): ");
+				String daño = s.nextLine();
+				System.out.print("Ingresa la cantidad de curacion (entero): ");
+				String cantidadHeal = s.nextLine();
+				System.out.print("Ingresa la presion del agua (entero): ");
+				String presionDeAgua = s.nextLine();
+				
+				int nuevoDaño = 0;
+				int nuevaCuracion = 0;
+				int nuevaPresionDeAgua = 0;
+				
+				try
+				{
+					nuevoDaño = Integer.parseInt(daño);
+					nuevaCuracion = Integer.parseInt(cantidadHeal);
+					nuevaPresionDeAgua = Integer.parseInt(presionDeAgua);
+				} catch (NumberFormatException e)
+				{
+					System.out.println("Algun valor incorrecto. Vuelva a ingresar");
+				}
+				
+				sistema.crearNuevoHechizoComplejo(nombreHechizoNuevo,tipoHechizoNuevo, nuevoDaño,
+						nuevaCuracion,nuevaPresionDeAgua);
 			}
 		}
 		
@@ -378,6 +477,16 @@ public class App {
 			System.out.println("Ese tipo no existe");
 		}
 			
+	}
+	
+	// Elimina el hechizo que se prefiera
+	public static void eliminarHechizo(Scanner s)
+	{
+		System.out.println("\nQue hechizo quieres eliminar?");
+		for (int i = 0; i < sistema.cantidadDeHechizos(); i++)
+		{
+			System.out.println(i+1 + ")" + sistema.mostrarHechizos(i));
+		}
 	}
 	
 	// Funcion que perimite encontrar los diez mejores hechizos
