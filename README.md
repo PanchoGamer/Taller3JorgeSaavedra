@@ -23,7 +23,7 @@ Se nos pide realizar un juego de magia para un proyecto de programacion avanzada
    - Mostrar todos los magos junto a su puntuacion
 
 ## Indicaciones
-###Para esto se nos indican unas cosas, por ejemplo:
+### Para esto se nos indican unas cosas, por ejemplo:
 
 -Para cada tipo de hechizo existe un metodo diferente para calcular su puntuacion.
 
@@ -35,11 +35,11 @@ Se nos pide realizar un juego de magia para un proyecto de programacion avanzada
 > 
 > Para Agua --> Puntaje = (Daño+CantidadHeal+PresionDeAgua)*2
 
--Calcular Mejor Mago
+- Calcular Mejor Mago
 >La puntuacion de cada mago se calcula sumando las puntuaciones de cada hechizo que domina.
 
--Menu de Administrador
->Se deben ver reflejados los cambios efectuados, en sus respectivos txt.
+- Menu de Administrador
+> Se deben ver reflejados los cambios efectuados, en sus respectivos txt.
 
 Se nos permite el uso de ciertas librerias tales como:
 
