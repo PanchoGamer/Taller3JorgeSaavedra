@@ -9,7 +9,7 @@ Se nos pide realizar un juego de magia para un proyecto de programacion avanzada
 1. Menu Administrador
    - Añadir Mago
    - Modificar Mago
-   - Elimnar Mago
+   - Eliminar Mago
    - Añadir Hechizo
    - Modificar Hechizo
    - Eliminar Hechizo
@@ -27,10 +27,13 @@ Se nos pide realizar un juego de magia para un proyecto de programacion avanzada
 
 *Para cada tipo de hechizo existe un metodo diferente para calcular su puntuacion.
 
->Para Fuego --> Puntaje = Daño*DuracionQuemadura
->Para Tierra --> Puntaje = (Daño*MejoraDefensa)/2
->Para Planta --> Puntaje = Daño + (DuracionStun * CantPlanta)
->Para Agua --> Puntaje = (Daño+CantidadHeal+PresionDeAgua)*2
+> Para Fuego --> Puntaje = Daño*DuracionQuemadura
+>
+> Para Tierra --> Puntaje = (Daño*MejoraDefensa)/2
+> 
+> Para Planta --> Puntaje = Daño + (DuracionStun * CantPlanta)
+> 
+> Para Agua --> Puntaje = (Daño+CantidadHeal+PresionDeAgua)*2
 
 *Calcular Mejor Mago
 >La puntuacion de cada mago se calcula sumando las puntuaciones de cada hechizo que domina.
