@@ -1,3 +1,7 @@
+/// Nombre: Jorge Andrés Saavedra Sanchez  
+/// Rut: 22.347.590-6  
+/// Carrera: Ingenieria en Tecnologias de Informacion
+
 package Logica;
 
 import java.io.File;
@@ -15,6 +19,7 @@ public class App {
 		menu();
 	}
 
+	// Funcion que reconoce el archvio de hechizos y los lee
 	public static void leerHechizos() throws FileNotFoundException
 	{
 		File f = new File("txts/Hechizos.txt");
@@ -29,6 +34,7 @@ public class App {
 		sArch1.close();
 	}
 	
+	// Funcion que reconoce el archivo de magos y los lee
 	public static void leerMagos() throws FileNotFoundException
 	{
 		File f1 = new File("txts/Magos.txt");
@@ -43,6 +49,7 @@ public class App {
 		sArch.close();
 	}
 	
+	// Menu principal para acceder al menu de analisis o al menu de administrador
 	public static void menu()
 	{
 		Scanner s = new Scanner(System.in);
@@ -50,7 +57,7 @@ public class App {
 		
 		do
 		{
-			System.out.println("1. Menu Administrador");
+			System.out.println("\n1. Menu Administrador");
 			System.out.println("2. Menu Analista");
 			System.out.println("3. Salir");
 			System.out.print("> ");
@@ -79,8 +86,10 @@ public class App {
 		} while (opcion != 3);
 	}
 	
+	// Manejo principal del menu de analisis
 	public static void menuAnalisis(Scanner s)
 	{
+		System.out.println("Menu Analisis");
 		int option = 0;
 		do
 		{
@@ -138,8 +147,10 @@ public class App {
 		} while (option != 7);
 	}
 	
+	// Manejo principal del menu administrador
 	public static void menuAdmin(Scanner s)
 	{
+		System.out.println("\nMenu Administrador");
 		int option = 0;
 		do
 		{
@@ -177,9 +188,15 @@ public class App {
 				eliminarMago(s);
 			}
 			
+			else if (option == 4)
+			{
+				agregarHechizo(s);
+			}
+			
 		} while (option != 7);
 	}
-
+	
+	// Crea los magos que sean hechos por el menu administrador
 	public static void crearMago(Scanner s) {
 		System.out.print("Ingrese el nombre del mago: ");
 		String nombre = s.nextLine();
@@ -237,6 +254,7 @@ public class App {
 		sistema.reescribirMagos();
 	}
 	
+	// Modifica los atributod del mago deseado
 	public static void modificarMago(Scanner s)
 	{
 		
@@ -310,6 +328,7 @@ public class App {
 		
 	}
 	
+	// Elimina un mago deseado
 	public static void eliminarMago(Scanner s)
 	{
 		System.out.println("Que mago quieres eliminar:");
@@ -320,6 +339,48 @@ public class App {
 		
 	}
 	
+	// Agrega un hechizo desde el menu administrador
+	public static void agregarHechizo(Scanner s)
+	{
+		System.out.print("\nIngrese el nombre del hechizo: ");
+		String nombreHechizoNuevo = s.nextLine();
+		System.out.print("Ingresa el tipo de hechizo: ");
+		String tipoHechizoNuevo = s.nextLine();
+		
+		if (tipoHechizoNuevo.equalsIgnoreCase("Fuego") || tipoHechizoNuevo.equalsIgnoreCase("Tierra")
+			|| tipoHechizoNuevo.equalsIgnoreCase("Planta") || tipoHechizoNuevo.equalsIgnoreCase("Agua"))
+		{
+			if (tipoHechizoNuevo.equalsIgnoreCase("Fuego"))
+			{
+				System.out.print("Ingresa el daño que hara el hechizo (entero): ");
+				String daño = s.nextLine();
+				System.out.print("Ingresa el tiempo de quemadura (entero): ");
+				String tiempoDeQuemadura = s.nextLine();
+				
+				int nuevoDaño = 0;
+				int nuevoTiempoDeQuemadura = 0;
+				
+				try
+				{
+					nuevoDaño = Integer.parseInt(daño);
+					nuevoTiempoDeQuemadura = Integer.parseInt(tiempoDeQuemadura);
+				} catch (NumberFormatException e)
+				{
+					System.out.println("Algun valor incorrecto. Vuelva a ingresar");
+				}
+				
+				sistema.crearNuevoHechizoSimple(nombreHechizoNuevo,tipoHechizoNuevo, tiempoDeQuemadura);
+			}
+		}
+		
+		else
+		{
+			System.out.println("Ese tipo no existe");
+		}
+			
+	}
+	
+	// Funcion que perimite encontrar los diez mejores hechizos
 	public static void encontrarDiezHechizos() 
 	{
 		System.out.println("Los 10 mejores hechizos!");
@@ -330,6 +391,7 @@ public class App {
 		}
 	}
 	
+	// Funcion que permite encontrar los tres mejores magos
 	public static void encontrarTresMagos()
 	{
 		System.out.println("Los 3 mejores Magos!");
@@ -340,6 +402,7 @@ public class App {
 		}
 	}
 	
+	// Funcion que permite mostrar los hechizos tanto con o sin puntaje
 	public static void mostrarHechizos(int tipo)
 	{
 		int cantHechizos = sistema.cantidadDeHechizos();
@@ -357,6 +420,7 @@ public class App {
 		}
 	}
 	
+	// Funcion que permite mostrar los magos tanto con o sin puntajes totales
 	public static void mostrarMagos(int tipo)
 	{
 		int cantMagos = sistema.cantidadDeMagos();

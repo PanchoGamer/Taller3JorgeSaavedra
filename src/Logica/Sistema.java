@@ -17,7 +17,9 @@ public interface Sistema {
 	void eliminarMago(String nomMago);
 	void eliminarMagoMenu(int index);
 	void reescribirMagos();
+	void reescribirHechizos();
 	void cambiarNombre(int index, String nuevoNombre);
 	String mostrarHechizosDeMago(int index, int magoElegido);
 	int hechizosMago(int magoElegido);
+	void crearNuevoHechizoSimple(String nombre, String tipo, int daño, int tiempoDeQuemadura);
 }

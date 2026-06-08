@@ -13,7 +13,7 @@ public class Magos {
 	{
 		this.nombre = nombre;
 	}
-
+	
 	public String getNombre() 
 	{
 		return nombre;

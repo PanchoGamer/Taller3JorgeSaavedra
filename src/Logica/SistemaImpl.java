@@ -13,6 +13,7 @@ public class SistemaImpl implements Sistema{
 	public static List<Magos> maguitos = new ArrayList<>();
 	public static List<Hechizos> hechizos = new ArrayList<>();
 	
+	// Crea los objetos magos y los guarda en la lista correspondiente
 	public void crearMagos(String linea)
 	{
 		String[] partes = linea.split(";");
@@ -34,7 +35,8 @@ public class SistemaImpl implements Sistema{
 			}
 		}
 	}
-	
+
+	// Crea los objetos hechizos y los guarda en la lista correspondiente
 	public void crearHechizos(String linea)
 	{
 		String[] partes = linea.split(";");
@@ -72,6 +74,7 @@ public class SistemaImpl implements Sistema{
 		}
 	}
 
+	// Lee la lista, crea una copia, la ordena y retorna los nombres de ciertos hechizos
 	@Override
 	public String encontrarMejoresHechizos(int index) 
 	{
@@ -98,7 +101,8 @@ public class SistemaImpl implements Sistema{
 		
 		return hechizos.get(index).getNombreHechizo();
 	}
-
+	
+	// Lee la lista, crea una copia, la ordena y retorna los nombres de ciertos magos
 	@Override
 	public String mejoresMagos(int index) 
 	{
@@ -124,6 +128,7 @@ public class SistemaImpl implements Sistema{
 		return mTemp.get(index).getNombre();
 	}
 	
+	// Permite agregar mas hechizos a otros magos
 	@Override
 	public void agregarHechizosMagos(String nombre, String hechizo)
 	{
@@ -153,6 +158,7 @@ public class SistemaImpl implements Sistema{
 		}
 	}
 	
+	// Crea un mago y lo agrega a la lista
 	@Override
 	public void agregarMago(String nombre)
 	{
@@ -160,11 +166,13 @@ public class SistemaImpl implements Sistema{
 		maguitos.add(m);
 	}
 	
+	// Retorna el nombre de un hechizo en especifico
 	public String mostrarHechizos(int index)
 	{
 		return hechizos.get(index).getNombreHechizo();
 	}
 
+	// Retorna la cantidad de hechizos que hay hasta el momento
 	@Override
 	public int cantidadDeHechizos() 
 	{
@@ -172,6 +180,7 @@ public class SistemaImpl implements Sistema{
 		return cantHechizos;
 	}
 	
+	// Retorna la cantidad de magos que hay hasta el momento
 	@Override
 	public int cantidadDeMagos()
 	{
@@ -179,12 +188,14 @@ public class SistemaImpl implements Sistema{
 		return cantMagos;
 	}
 	
+	// Retorna el nombre del mago del indice que indiqua
 	@Override
 	public String mostrarMagos(int index)
 	{
 		return maguitos.get(index).getNombre();
 	}
 	
+	// Retorna el nombre del mago junto al puntaje que tiene
 	@Override
 	public String mostrarMagosConPuntaje(int index)
 	{
@@ -192,13 +203,15 @@ public class SistemaImpl implements Sistema{
 		return linea;
 	}
 	
+	// Retorna el nombre del hechizo junto al puntaje que tiene
 	@Override
 	public String mostrarHechizosConPuntaje(int index)
 	{
 		String linea = hechizos.get(index).getNombreHechizo() + " | Puntaje: " + hechizos.get(index).calcularPuntaje();
 		return linea;
 	}
-	
+
+	// Elimina el mago que haya sido pedido cuando hay un error al momento de crear este mismo
 	@Override
 	public void eliminarMago(String nomMago)
 	{
@@ -211,6 +224,7 @@ public class SistemaImpl implements Sistema{
 		}
 	}
 	
+	// Permite cambiar el nombre de un mago
 	@Override
 	public void cambiarNombre(int index, String nuevoNombre)
 	{
@@ -218,6 +232,7 @@ public class SistemaImpl implements Sistema{
 		reescribirMagos();
 	}
 	
+	// Permite eliminar un mago por el menu administrador y lo saca de la lista
 	@Override
 	public void eliminarMagoMenu(int index)
 	{
@@ -225,6 +240,14 @@ public class SistemaImpl implements Sistema{
 		 reescribirMagos();
 	}
 	
+	// Permite crear un nuevo hechizo y agregarlo a la lista
+	@Override
+	public void crearNuevoHechizoSimple(String nombre, String tipo, int daño, int tiempoDeQuemadura)
+	{
+		
+	}
+	
+	// Permite reescribir el archivo de magos
 	@Override
 	public void reescribirMagos()
 	{
@@ -257,6 +280,19 @@ public class SistemaImpl implements Sistema{
 		
 	}
 	
+	// Permite reescribir el archivo de hechizos
+	@Override
+	public void reescribirHechizos()
+	{
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("txts/Hechizos.txt"));
+		} catch (IOException e)
+		{
+		}
+		
+	}
+	
+	// Retorna el nombre de un hechizo que tenga un mago en especifico
 	@Override
 	public String mostrarHechizosDeMago(int index, int magoElegido)
 	{
@@ -264,6 +300,7 @@ public class SistemaImpl implements Sistema{
 		return hechizo;
 	}
 	
+	// Retorna la cantidad de hechizos que tiene un mago en especifico
 	@Override
 	public int hechizosMago(int magoElegido)
 	{
