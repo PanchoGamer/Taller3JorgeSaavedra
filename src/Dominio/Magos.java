@@ -29,24 +29,29 @@ public class Magos {
 		return puntajeTotal;
 	}
 	
+	public List<Hechizos> getHechizosPropios() 
+	{
+		return this.hechizosPropios;
+	}
+
 	public int cantidadHechizos()
 	{
-		return hechizosPropios.size();
+		return this.hechizosPropios.size();
 	}
 	
 	public String getHechizo(int index)
 	{
-		return hechizosPropios.get(index).getNombreHechizo();
+		return this.hechizosPropios.get(index).getNombreHechizo();
 	}
 	
 	public String nombreHechizoPropio(int index)
 	{
-		return hechizosPropios.get(index).getNombreHechizo();
+		return this.hechizosPropios.get(index).getNombreHechizo();
 	}
 
 	public void agregarHechizos(Hechizos h)
 	{
-		hechizosPropios.add(h);
+		this.hechizosPropios.add(h);
 	}
 	
 	public double calcularPuntajeTotal()

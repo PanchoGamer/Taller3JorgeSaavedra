@@ -3,7 +3,7 @@ Ferran;Salmuera|Envite Igneo|Disparo Lodo|Poder Pasado|Rueda Fuego|Hidroariete|B
 Sasa;Infierno|Martillazo|Hidroariete|Envite Igneo
 Mul;Gigadrenado|Rayo Burbuja|Danza Lluvia|Pistola Agua
 Branco;Arraigo|Silvato|Danza Lluvia
-MartinNegro;Acua Aro|Tumba Rocas|Polen Somnífero|Escaldar|Disparo Lodo|Cascada|Pirotecnia
+MartinNegro;Acua Aro|Polen Somnífero|Escaldar|Disparo Lodo|Cascada|Pirotecnia
 EmaArdillaRabiosa;Origen Pulso|Fuego Sagrado|Cascada|Llamarada Azul
 Danini;Fuego Sagrado|Pedrada|Envite Igneo|Hierba Lazo|Surf
 Maxi;Explosión Ígnea|Envite Igneo|Agua Lodosa

@@ -281,6 +281,15 @@ public class SistemaImpl implements Sistema{
 	{
 		hechizos.remove(index);
 		reescribirHechizos();
+		
+		for (Magos m: maguitos)
+		{
+			if (m.getHechizosPropios().contains(hechizos.get(index)))
+			{
+				m.getHechizosPropios().remove(hechizos.get(index));
+			}
+		}
+		reescribirMagos();
 	}
 	
 	// Permite reescribir el archivo de magos

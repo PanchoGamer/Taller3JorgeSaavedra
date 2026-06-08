@@ -193,6 +193,16 @@ public class App {
 				agregarHechizo(s);
 			}
 			
+			else if (option == 5)
+			{
+				modificarHechizo(s);
+			}
+			
+			else if (option == 6)
+			{
+				eliminarHechizo(s);
+			}
+			
 		} while (option != 7);
 	}
 	
@@ -338,6 +348,7 @@ public class App {
 			System.out.println(i+1 + ")" + sistema.mostrarMagos(i));
 		}
 		
+		System.out.println(sistema.cantidadDeMagos());
 		System.out.print("> ");
 		String magoSeleccionado = s.nextLine();
 		
@@ -349,14 +360,15 @@ public class App {
 			System.out.println("Ingrese un numero");
 		}
 		
-		if (seleccion > 1 || seleccion < sistema.cantidadDeHechizos())
-		{
-			sistema.eliminarMagoMenu(seleccion-1);
-		}
-		
-		else
+		if (seleccion > sistema.cantidadDeMagos() || seleccion < 1)
 		{
 			System.out.println("Elija solo entre los que se muestran\n");
+		}
+		
+		else 
+		{
+			sistema.eliminarMagoMenu(seleccion-1);
+
 		}
 		
 	}
@@ -479,13 +491,62 @@ public class App {
 			
 	}
 	
+	// Permite modificar los hechizos a gusto
+	public static void modificarHechizo(Scanner s)
+	{
+		
+		
+		int seleccion = 0;
+		
+		for (int i = 0; i < sistema.cantidadDeHechizos(); i++)
+		{
+			System.out.println(i+1 + ")" + sistema.mostrarHechizos(i));
+		}
+		
+		System.out.print("> ");
+		String hechizoElegido = s.nextLine();
+		
+		try
+		{
+			seleccion = Integer.parseInt(hechizoElegido);
+		} 
+		catch (NumberFormatException e)
+		{
+			System.out.println("Ingrese solo numeros");
+		}
+		
+		
+		
+	}
+	
 	// Elimina el hechizo que se prefiera
 	public static void eliminarHechizo(Scanner s)
 	{
+		int seleccion = 0;
 		System.out.println("\nQue hechizo quieres eliminar?");
 		for (int i = 0; i < sistema.cantidadDeHechizos(); i++)
 		{
 			System.out.println(i+1 + ")" + sistema.mostrarHechizos(i));
+		}
+		System.out.print("> ");
+		
+		String hechizoSeleccionado = s.nextLine();
+		
+		try
+		{
+			seleccion = Integer.parseInt(hechizoSeleccionado);
+		} catch (NumberFormatException e)
+		{
+			System.out.println("Ingrese solo numeros");
+		}
+		
+		if (seleccion > sistema.cantidadDeHechizos() || seleccion < 1)
+		{
+			System.out.println("Solo eliga entre los que se muestran");
+		}
+		else
+		{
+			sistema.eliminarHechizo(seleccion-1);
 		}
 	}
 	
